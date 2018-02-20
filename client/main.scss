@@ -33,11 +33,44 @@
 	}
 }
 
+header{
+	background:#43d1af;
+}
+
+.nav-menu{
+	li{
+		a{
+			color:#fff;
+			&:hover{
+				background:none;
+			}
+			&:focus{
+				background:none;
+			}
+		}
+	}
+}
+
+.input-area{
+	position: relative;
+}
+
 .patient-list{
 	margin:0;
 	padding:0;
 	list-style-type:none;
 	.inner-list{
 		margin:0 0 15px 0;
+	}
+}
+
+.create-input{
+	border:0;
+	box-shadow:none;
+	border-bottom:1px solid #eee;
+	border-radius:0px;
+	&:focus{
+		box-shadow:none;
+		border-color:#eee;
 	}
 }

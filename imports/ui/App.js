@@ -7,12 +7,18 @@ class App extends Component{
 	render(){
 		return(
 			<div>
+				<header>
+					<div className="container">
+						<div className="row">
+							<Header />
+						</div>
+					</div>
+				</header>
 				<div className="container">
 					<div className="row">
 						<div className="col-md-12">
-							<Header />
 							{this.props.children}
-						</div>					
+						</div>			
 					</div>
 				</div>
 				

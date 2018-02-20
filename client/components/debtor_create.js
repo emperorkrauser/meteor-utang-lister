@@ -15,7 +15,7 @@ class PatientCreate extends Component{
 	}
 
 	handleUpload(e){
-
+		console.log("clicked");
 	}
 
 	handleSubmit(e){
@@ -87,27 +87,34 @@ class PatientCreate extends Component{
 							<h1>Add a Debtor</h1>
 							<form onSubmit={this.handleSubmit.bind(this)}>
 								<div className="col-md-6">
-									<p>First Name</p>
-									<input ref="first_name" name="first_name" type="text" className="form-control" placeholder=""/>
-									<div ref="fname_error" className="fname-error error text-danger">{this.state.error}</div>
+									<div className="input-area">
+										<p>First Name</p>
+										<input ref="first_name" name="first_name" type="text" className="form-control create-input" placeholder=""/>
+										<div ref="fname_error" className="fname-error error text-danger">{this.state.error}</div>
+									</div>
 									<p>Last Name</p>
-									<input ref="last_name" name="last_name" type="text" className="form-control" placeholder=""/>
+									<input ref="last_name" name="last_name" type="text" className="form-control create-input" placeholder=""/>
 									<div ref="lname_error" className="fname-error error text-danger">{this.state.error}</div>
 									<p>Age</p>
-									<input ref="age" name="age" type="number" className="form-control" placeholder=""/>
+									<input ref="age" name="age" type="number" className="form-control create-input" placeholder=""/>
 									<div ref="age_error" className="fname-error error text-danger">{this.state.error}</div>
 									<p>Address</p>
-									<input ref="address" name="address" type="text" className="form-control" placeholder=""/>
+									<input ref="address" name="address" type="text" className="form-control create-input" placeholder=""/>
 									<div ref="address_error" className="fname-error error text-danger">{this.state.error}</div>
 									<p>Amount</p>
-									<input ref="amount" name="address" type="text" className="form-control" placeholder=""/>
+									<input ref="amount" name="address" type="text" className="form-control create-input" placeholder=""/>
 									<div ref="amount_error" className="fname-error error text-danger">{this.state.error}</div>
 								</div>
 								<div className="col-md-6">
-									<p className="text-left">
-										<img src="http://via.placeholder.com/150x150" onClick={this.handleUpload.bind(this)} alt=""/>
+									<div className="text-left">
+										<div className="profile-pic-container">
+											<img src="http://via.placeholder.com/150x150"alt=""/>
+											<div className="profile-upload-button">
+												<p>Upload</p>
+											</div>
+										</div>
 										<input style={{display: "none"}} ref={input => {this.fileInput = input}} type="file" id="image" />
-									</p>
+									</div>
 								</div>
 								<br/>
 								<div className="col-md-12">

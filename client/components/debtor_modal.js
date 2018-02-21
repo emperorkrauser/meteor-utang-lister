@@ -13,10 +13,12 @@ class Modal extends Component{
 			age:"",
 			address:"",
 			property: "",
+			debt: "",
 			first_nameError:"",
 			last_nameError:"",
 			age_Error:"",
-			address_Error:""
+			address_Error:"",
+			debt_Error:""
 		}
 	}
 
@@ -29,7 +31,7 @@ class Modal extends Component{
 			first_name: first_name,
 			last_name: last_name,
 			age: age,
-			address: address
+			address: address,
 		})
 	}
 
@@ -48,15 +50,17 @@ class Modal extends Component{
 		const last_name = this.refs.last_name.value.trim();
 		const age = this.refs.age.value.trim();
 		const address = this.refs.address.value.trim();
-		const id = this.props.patient._id;
-		const sharedEmails = ["krauserchristian@gmail.com", "test@example.com"]
+		const id = this.props.debtor._id;
+		const sharedEmails = ["krauserchristian@gmail.com", "test@example.com"];
+		const debt = this.refs.debt.value.trim();
 
 		const inputs = {
 			first_name,
 			last_name,
 			age,
 			address,
-			id
+			id,
+			debt
 		};
 
 		const keys = Object.keys(inputs);
@@ -104,7 +108,8 @@ class Modal extends Component{
 				age,
 				address,
 				modifiedAt: new Date(),
-				sharedWith: sharedEmails
+				sharedWith: sharedEmails,
+				debt
 			}, (error) => {
 				// callback if there is an error
 				if(error){
@@ -175,6 +180,15 @@ class Modal extends Component{
 									key={debtor.address ? debtor.address : ""} />
 									<div className="text-danger">
 										{this.state.address_Error}
+									</div>
+								</div>
+								<div className="form-group">
+									<label>Debt</label>
+									<input ref="debt" type="text" onChange={this.handleChange.bind(this, 'debt')} className="form-control" id="" 
+									defaultValue={debtor.debt}
+									key={debtor.debt ? debtor.deby : ""} />
+									<div className="text-danger">
+										{this.state.debt_Error}
 									</div>
 								</div>
 

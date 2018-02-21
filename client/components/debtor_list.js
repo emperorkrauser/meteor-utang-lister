@@ -39,12 +39,12 @@ class DebtorList extends Component{
 			return(
 				<li className="inner-list" key={obj._id}>
 					<ul className="list-group">
-						<li className="list-group-item">{obj.first_name}</li>
-						<li className="list-group-item">{obj.last_name}</li>
-						<li className="list-group-item">{obj.age}</li>
-						<li className="list-group-item">{obj.address}</li>
-						<li className="list-group-item">{obj.debt}</li>
-						<li className="list-group-item"><Link to={{pathname: `/debtor/${obj._id}`}}>more</Link></li>
+						<li className=""><img src="http://via.placeholder.com/150x150" alt=""/></li>
+						<li className="">Name: {obj.first_name} {obj.last_name}</li>
+						<li className="">Age: {obj.age}</li>
+						<li className="">Address: {obj.address}</li>
+						<li className="">Debt: {obj.debt}</li>
+						<li className=""><Link to={{pathname: `/debtor/${obj._id}`}}>more</Link></li>
 					</ul>
 					<button onClick={ (e) => {
 						// pass the event and id as parameters for the deletePatient method
@@ -52,23 +52,21 @@ class DebtorList extends Component{
 					}} className="btn btn-danger">Delete</button>
 					<button id="edit" data-toggle="modal" data-target="#exampleModal" onClick={ (e) => {
 						this.editDebtor(e, obj)
-					}} className="btn btn-primary">Edit</button>
+					}} className="btn btn-default">Edit</button>
 				</li>
 			)
 		});
 
 		return(
-			<div className="container">
-				<div className="row">
-					<div className="col-md-12">
-						<div>Debtors</div>
-						<ul className="patient-list">
-							{debtors}
-						</ul>
-						<Modal debtor={list} />
-					</div>
+			<div>
+				<div>
+					<h1>Debtors</h1>
 				</div>
-			</div>
+				<ul className="debtor-list">
+					{debtors}
+				</ul>
+				<Modal debtor={list} />
+			</div>	
 		)
 	}
 

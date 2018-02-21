@@ -7,8 +7,6 @@ class Debtor extends Component{
 		return(
 			<div>
 				<DebtorCreate />
-				<br/>
-				<DebtorList />
 			</div>
 		)
 	}

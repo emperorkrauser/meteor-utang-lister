@@ -8,15 +8,17 @@ Meteor.methods({
 			age: debtors.age,
 			address: debtors.address,
 			profile_pic: debtors.profile_pic,
+			phone: debtors.phone,
 			createdAt: debtors.date,
 			sharedWith: [],
 			owner: debtors.owner,
 			username: debtors.username,
-			debt: debtors.debt
+			debt: debtors.debt,
+			payment:debtors.payment,
+			paid: debtors.status
 		});
 	},
 	'debtors.remove': function(id){
-		// console.log(id);
 		Debtors.remove(id);
 	},
 	'debtors.update': function(debtors){
@@ -26,9 +28,12 @@ Meteor.methods({
 				last_name: debtors.last_name,
 				age: debtors.age,
 				address: debtors.address,
+				phone: debtors.phone,
 				modifiedAt: debtors.modifiedAt,
 				sharedWith: debtors.sharedWith,
-				debt: debtors.debt
+				debt: debtors.debt,
+				payment:debtors.payment,
+				paid: debtors.status
 			}
 		});
 	}

@@ -123,6 +123,21 @@ header{
 	}
 }
 
+// modal
+.debtor-modal-header{
+	border:0;
+}
+
+.debtor-modal-content{
+	border-radius:0px;
+	button{
+		margin:0 5px 0 0;
+		border:{
+			radius:0px;
+		}
+	}
+}
+
 // misc
 .nopadding{
 	padding:0;

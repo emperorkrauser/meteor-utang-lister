@@ -14,11 +14,13 @@ class Modal extends Component{
 			address:"",
 			property: "",
 			debt: "",
+			phone:"",
 			first_nameError:"",
 			last_nameError:"",
 			age_Error:"",
 			address_Error:"",
-			debt_Error:""
+			debt_Error:"",
+			phone_Error:""
 		}
 	}
 
@@ -27,11 +29,15 @@ class Modal extends Component{
 		const last_name = this.refs.last_name.defaultValue.trim();
 		const age = this.refs.age.defaultValue.trim();
 		const address = this.refs.address.defaultValue.trim();
+		const phone = this.refs.phone.defaultValue.trim();
+		const debt = this.refs.debt.defaultValue.trim();
 		this.setState({
 			first_name: first_name,
 			last_name: last_name,
 			age: age,
 			address: address,
+			phone: phone,
+			debt: debt
 		})
 	}
 
@@ -53,6 +59,7 @@ class Modal extends Component{
 		const id = this.props.debtor._id;
 		const sharedEmails = ["krauserchristian@gmail.com", "test@example.com"];
 		const debt = this.refs.debt.value.trim();
+		const phone = this.refs.phone.value.trim();
 
 		const inputs = {
 			first_name,
@@ -60,7 +67,8 @@ class Modal extends Component{
 			age,
 			address,
 			id,
-			debt
+			debt,
+			phone
 		};
 
 		const keys = Object.keys(inputs);
@@ -109,7 +117,8 @@ class Modal extends Component{
 				address,
 				modifiedAt: new Date(),
 				sharedWith: sharedEmails,
-				debt
+				debt,
+				phone
 			}, (error) => {
 				// callback if there is an error
 				if(error){
@@ -135,29 +144,31 @@ class Modal extends Component{
 		return(
 			<div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				<div className="modal-dialog" role="document">
-					<div className="modal-content">
-						<div className="modal-header">
-							<h5 className="modal-title" id="exampleModalLabel">Modal title</h5>
+					<div className="modal-content debtor-modal-content">
+						<div className="modal-header debtor-modal-header">
 							<button type="button" className="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 							</button>
+							<h4 className="text-left">Edit Debtor</h4>
 						</div>
 						<div className="modal-body">
 							<form action="" onSubmit={this.handleSubmit.bind(this)}>
 								<div className="form-group">
-									<label>First Name</label>
-									{/*// put key on an input so that you can use the default value from the props*/} 
-									<input ref="first_name" type="text" onChange={this.handleChange.bind(this, 'first_name')} className="form-control" id="" 
-									defaultValue={debtor.first_name}
-									key={debtor.first_name ? debtor.first_name : this.state.first_name}
-									/>
-									<div className="text-danger">
-										{this.state.first_nameError}
+									<div className="input-area">
+										<label>First Name</label>
+										{/*// put key on an input so that you can use the default value from the props*/} 
+										<input ref="first_name" type="text" onChange={this.handleChange.bind(this, 'first_name')} className="form-control create-input" id="" 
+										defaultValue={debtor.first_name}
+										key={debtor.first_name ? debtor.first_name : this.state.first_name}
+										/>
+										<div className="text-danger">
+											{this.state.first_nameError}
+										</div>
 									</div>
 								</div>
 								<div className="form-group">
 									<label>Last Name</label>
-									<input ref="last_name" type="text" onChange={this.handleChange.bind(this, 'last_name')} className="form-control" id="" 
+									<input ref="last_name" type="text" onChange={this.handleChange.bind(this, 'last_name')} className="form-control create-input" id="" 
 									defaultValue={debtor.last_name}
 									key={debtor.last_name ? debtor.last_name : ""}/>
 									<div className="text-danger">
@@ -166,8 +177,8 @@ class Modal extends Component{
 								</div>
 								<div className="form-group">
 									<label>Age</label>
-									<input ref="age" type="number" onChange={this.handleChange.bind(this, 'age')} className="form-control" id="" 
-									defaultValue={debtor.age}
+									<input ref="age" type="number" onChange={this.handleChange.bind(this, 'age')} className="form-control create-input" id="" 
+									defaultValue={debtor.age ? debtor.age : ""}
 									key={debtor.age ? debtor.age : ""}/>
 									<div className="text-danger">
 										{this.state.age_Error}
@@ -175,18 +186,27 @@ class Modal extends Component{
 								</div>
 								<div className="form-group">
 									<label>Address</label>
-									<input ref="address" type="text" onChange={this.handleChange.bind(this, 'address')} className="form-control" id="" 
-									defaultValue={debtor.address}
+									<input ref="address" type="text" onChange={this.handleChange.bind(this, 'address')} className="form-control create-input" id="" 
+									defaultValue={debtor.address ? debtor.address: ""}
 									key={debtor.address ? debtor.address : ""} />
 									<div className="text-danger">
 										{this.state.address_Error}
 									</div>
 								</div>
 								<div className="form-group">
+									<label>Phone</label>
+									<input ref="phone" type="text" onChange={this.handleChange.bind(this, 'phone')} className="form-control create-input" id="" 
+									defaultValue={debtor.phone ? debtor.phone: ""}
+									key={debtor.phone ? debtor.phone : ""} />
+									<div className="text-danger">
+										{this.state.phone_Error}
+									</div>
+								</div>
+								<div className="form-group">
 									<label>Debt</label>
-									<input ref="debt" type="text" onChange={this.handleChange.bind(this, 'debt')} className="form-control" id="" 
+									<input ref="debt" type="text" onChange={this.handleChange.bind(this, 'debt')} className="form-control create-input" id="" 
 									defaultValue={debtor.debt}
-									key={debtor.debt ? debtor.deby : ""} />
+									key={debtor.debt ? debtor.debt : ""} />
 									<div className="text-danger">
 										{this.state.debt_Error}
 									</div>

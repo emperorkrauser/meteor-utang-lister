@@ -14,7 +14,7 @@ Meteor.methods({
 			owner: debtors.owner,
 			username: debtors.username,
 			debt: debtors.debt,
-			payment:debtors.payment,
+			payment: [debtors.payment],
 			paid: debtors.status
 		});
 	},
@@ -22,20 +22,30 @@ Meteor.methods({
 		Debtors.remove(id);
 	},
 	'debtors.update': function(debtors){
-		Debtors.update({_id: debtors.id}, {$set:
-			{
-				first_name: debtors.first_name,
-				last_name: debtors.last_name,
-				age: debtors.age,
-				address: debtors.address,
-				phone: debtors.phone,
-				modifiedAt: debtors.modifiedAt,
-				sharedWith: debtors.sharedWith,
-				debt: debtors.debt,
-				payment:debtors.payment,
-				paid: debtors.status
+
+		Debtors.update({_id: debtors.id}, 
+			{	
+				// push should be first before the set
+				// if set is first, push will not work
+				$push:
+				{
+					payment: debtors.payment
+				},
+				$set:
+				{
+					first_name: debtors.first_name,
+					last_name: debtors.last_name,
+					age: debtors.age,
+					address: debtors.address,
+					phone: debtors.phone,
+					modifiedAt: debtors.modifiedAt,
+					sharedWith: debtors.sharedWith,
+					debt: debtors.debt,
+					// payment: debtors.payment,	
+					paid: debtors.status
+				}
 			}
-		});
+		);
 	}
 });
 

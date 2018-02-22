@@ -30,8 +30,6 @@ class PatientCreate extends Component{
 		console.log(this.fileInput.files[0]);
 		const date = new Date();
 
-		// console.log(Meteor.user());
-
 		if(!first_name){
 			console.log("error");
 

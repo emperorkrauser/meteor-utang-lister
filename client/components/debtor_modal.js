@@ -15,6 +15,7 @@ class Modal extends Component{
 			property: "",
 			debt: "",
 			phone:"",
+			payment:"",
 			first_nameError:"",
 			last_nameError:"",
 			age_Error:"",
@@ -42,7 +43,7 @@ class Modal extends Component{
 	}
 
 	handleChange(propertyName,e){
-		console.log(propertyName);
+		// console.log(propertyName);
 		const property = this.state.property;
 		property[propertyName] = event.target.value;
 		this.setState({
@@ -58,21 +59,27 @@ class Modal extends Component{
 		const address = this.refs.address.value.trim();
 		const id = this.props.debtor._id;
 		const sharedEmails = ["krauserchristian@gmail.com", "test@example.com"];
-		const debt = this.refs.debt.value.trim();
+		const currentDebt = this.refs.debt.value.trim();
 		const phone = this.refs.phone.value.trim();
+		const payment = this.refs.payment.value.trim();
 
+		// console.log(payment);
 		const inputs = {
 			first_name,
 			last_name,
 			age,
 			address,
 			id,
-			debt,
-			phone
+			currentDebt,
+			phone,
+			payment
 		};
+
+		const debt = currentDebt - payment;
 
 		const keys = Object.keys(inputs);
 		
+		// error handling for the fields
 		for(let properties in inputs){
 			if(inputs[properties] == ""){
 				if(properties == "first_name"){
@@ -109,6 +116,7 @@ class Modal extends Component{
 				last_nameError: ""
 			});
 
+			// call the update method on the debtors collection
 			Meteor.call("debtors.update", {
 				id,
 				first_name,
@@ -118,7 +126,8 @@ class Modal extends Component{
 				modifiedAt: new Date(),
 				sharedWith: sharedEmails,
 				debt,
-				phone
+				phone,
+				payment
 			}, (error) => {
 				// callback if there is an error
 				if(error){
@@ -136,11 +145,14 @@ class Modal extends Component{
 				$("#exampleModal").modal("hide");
 			});
 		}
+
+		this.refs.payment.value="";
 	}
 
 	render(){
 		const debtor=this.props.debtor;
 
+		console.log(debtor);
 		return(
 			<div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				<div className="modal-dialog" role="document">
@@ -207,6 +219,15 @@ class Modal extends Component{
 									<input ref="debt" type="text" onChange={this.handleChange.bind(this, 'debt')} className="form-control create-input" id="" 
 									defaultValue={debtor.debt}
 									key={debtor.debt ? debtor.debt : ""} />
+									<div className="text-danger">
+										{this.state.debt_Error}
+									</div>
+								</div>
+								<div className="form-group">
+									<label>Payment</label>
+									<input ref="payment" type="text" onChange={this.handleChange.bind(this, 'payment')} className="form-control create-input" id="" 
+									defaultValue=""
+									key={debtor.payment ? debtor.payment : ""} />
 									<div className="text-danger">
 										{this.state.debt_Error}
 									</div>

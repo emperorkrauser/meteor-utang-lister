@@ -36,6 +36,7 @@ class DebtorList extends Component{
 		// console.log(list);
 		// console.log(this.props.params.id);
 		const debtors = this.props.debtors.map( (obj) => {
+			// console.log(obj);
 			return(
 				<li className="inner-list" key={obj._id}>
 					<ul className="list-group">

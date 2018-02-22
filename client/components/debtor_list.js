@@ -33,10 +33,18 @@ class DebtorList extends Component{
 
 	render(){
 		const list = this.state.list;
-		// console.log(list);
-		// console.log(this.props.params.id);
+		let paymentsArr = [];
 		const debtors = this.props.debtors.map( (obj) => {
-			// console.log(obj);
+			let paidNow;
+
+			// this is to view the paid now properties of each debtor
+			for(key in obj.payment){
+				if(obj.payment.hasOwnProperty(key)){
+					paidNow = obj.payment[key].paidNow;
+					paymentsArr.push(paidNow);
+				}
+			}
+
 			return(
 				<li className="inner-list" key={obj._id}>
 					<ul className="list-group">

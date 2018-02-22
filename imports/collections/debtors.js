@@ -14,7 +14,12 @@ Meteor.methods({
 			owner: debtors.owner,
 			username: debtors.username,
 			debt: debtors.debt,
-			payment: [debtors.payment],
+			payment: [
+				{
+					paidNow: "",
+					paidDate: ""
+				}
+			],
 			paid: debtors.status
 		});
 	},
@@ -26,10 +31,13 @@ Meteor.methods({
 		Debtors.update({_id: debtors.id}, 
 			{	
 				// push should be first before the set
-				// if set is first, push will not work
+				// if set is first, push will not workcd /
 				$push:
 				{
-					payment: debtors.payment
+					payment: {
+						paidNow: debtors.payment,
+						paidDate: debtors.modifiedAt	
+					}
 				},
 				$set:
 				{
@@ -41,7 +49,6 @@ Meteor.methods({
 					modifiedAt: debtors.modifiedAt,
 					sharedWith: debtors.sharedWith,
 					debt: debtors.debt,
-					// payment: debtors.payment,	
 					paid: debtors.status
 				}
 			}

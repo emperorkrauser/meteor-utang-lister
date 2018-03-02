@@ -19,7 +19,7 @@ Meteor.startup( () => {
 				<Switch>
 					<Route exact path="/" component={Home} />
 					<Route path="/debtorlist" render={(props) => <DebtorList {...props} />} />
-					<Route path="/debtor/:id" render={ (props) => <DebtorDetail {...props} />} />
+					<Route path="/debtor/:debtorid" render={ (props) => <DebtorDetail {...props} />} />
 					<Route path="/debtor" render={(props) => <Debtor {...props} />} />
 					<Route component={NotFound}/>
 				</Switch>

@@ -5,6 +5,13 @@ import {Debtors} from "../../imports/collections/debtors";
 class DebtorDetail extends Component{
 	constructor(props){
 		super(props);
+		this.state = {
+			payments: ""
+		}
+	}
+
+	componentDidMount(){
+
 	}
 
 	render(){
@@ -19,15 +26,25 @@ class DebtorDetail extends Component{
 
 			let paidArr="";
 			const paidHistory = function(){
-				for(var x=0; x < debtor.payment.length; x++){
-					paidArr += "<li>" + debtor.payment[x].paidNow + "-" + debtor.payment[x].paidDate + "</li>";
+				console.log(debtor.payment.length);
+				if(debtor.payment.length == 1){
+					if(debtor.payment[0].paidNow == ""){
+						paidArr = "No payment yet";
+					}
+					return paidArr;
 				}
+				else{
+					for(var x=1; x < debtor.payment.length; x++){
+						paidArr += "<li> Amount:" + debtor.payment[x].paidNow + "- Date:"+ debtor.payment[x].paidDate + "</li>";
+					}
 
-				return paidArr;
+					return paidArr;
+				}
 			}
-			paidHistory();
 
 			console.log(paidArr);
+
+			document.querySelector(".payment-history").innerHTML = paidArr;
 
 			return(
 				<div>
@@ -38,7 +55,6 @@ class DebtorDetail extends Component{
 						<li>Debt: {debtor.debt}</li>
 						<li>Payment History:
 							<ul className="payment-history">
-								{paidArr}
 							</ul>
 						</li>
 					</ul>
